@@ -3,6 +3,7 @@ const main = async () => {
     const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
     const waveContract = await waveContractFactory.deploy();
     await waveContract.deployed();
+    
 
     console.log("Contract deployed to:", waveContract.address);
     console.log("Contract deployed by:", owner.address);
@@ -11,8 +12,21 @@ const main = async () => {
 
     const waveTxn = await waveContract.wave();
     await waveTxn.wait();
-  
+    
+  -
     await waveContract.getTotalWaves();
+
+    const secondWaveTxn= await waveContract.connect(randomPerson).wave();
+    await secondWaveTxn.wait();
+    
+
+    await waveContract.getTotalWaves();
+    
+    const waveSenders = await waveContract.getWaveSenders();
+    console.log("Wavees till now:");
+    waveSenders.forEach((address) => {
+      console.log(address);
+    });
   };
   
   const runMain = async () => {
