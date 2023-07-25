@@ -1,6 +1,6 @@
 const main = async () => {
 const Greeter = await ethers.getContractFactory("Greeter")
-const greeter = await Greeter.attach("0x575E9B4f2c3945d7CF07cb76628d29DF471692B8")
+const greeter = await Greeter.attach("0x6F2A4b32474a12dC5dAb04025D75f4cd10073A86")
 
 await greeter.greet()
 let tx
