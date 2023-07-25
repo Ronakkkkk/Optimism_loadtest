@@ -7,18 +7,16 @@ task("accounts", "Prints the list of accounts", async () => {
     console.log(account.address);
   }
 });
+const optimismGoerliUrl = 
+  process.env.ALCHEMY_API_KEY ? 
+    `https://opt-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` :
+    process.env.OPTIMISM_GOERLI_URL
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.18",
-  networks: {
-    goerli: {
-      url: process.env.STAGING_QUICKNODE_KEY,
-      accounts: [process.env.PRIVATE_KEY]
-    },
-    mainnet: {
-      url: process.env.PROD_QUICKNODE_KEY,
-      accounts: [process.env.PRIVATE_KEY],
-    },
-  },
+  "optimism-goerli": {
+    url: optimismGoerliUrl,
+    accounts: { mnemonic: process.env.MNEMONIC }
+ }  
 };
