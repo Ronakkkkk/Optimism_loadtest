@@ -1,28 +1,22 @@
 const main = async () => {
-    const [deployer] = await hre.ethers.getSigners();
-    const accountBalance = await deployer.getBalance();
-  
-    console.log("Deploying contracts with account: ", deployer.address);
-    console.log("Account balance: ", accountBalance.toString());
-  
-    const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
-    const waveContract = await waveContractFactory.deploy(
-      {value: hre.ethers.utils.parseEther("0.01"),}
-    );
-    await waveContract.deployed();
-  
-    console.log("WavePortal address: ", waveContract.address);
-  };
-  
-  
-  const runMain = async () => {
-    try {
-      await main();
-      process.exit(0);
-    } catch (error) {
-      console.log(error);
-      process.exit(1);
-    }
-  };
-  
-  runMain();
+  const Greeter = await hre.ethers.getContractFactory("Greeter");
+  const greeter = await Greeter.deploy("Hey!");
+  await greeter.deployed();
+  console.log("Greeter deployed to:", greeter.address);
+
+  // Call the greet function (No need to await for view functions)
+  const greeting = await greeter.greet();
+  console.log("Greeting:", greeting);
+};
+
+const runMain = async () => {
+  try {
+    await main();
+    process.exit(0);
+  } catch (error) {
+    console.error("Error occurred:", error);
+    process.exit(1);
+  }
+};
+
+runMain();
