@@ -15,8 +15,14 @@ const optimismGoerliUrl =
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.18",
+  networks: {
+    "local-devnode": {
+       url: "http://localhost:8545",
+       accounts: { mnemonic: "test test test test test test test test test test test junk" }
+    },
   "optimism-goerli": {
     url: optimismGoerliUrl,
     accounts: { mnemonic: process.env.MNEMONIC }
+  }
  }  
 };
